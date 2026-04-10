@@ -18,7 +18,21 @@ export const dictionary = {
     bidPlaceholder: "Ej: Voy a reparar el techo. El material cuesta $500 y la mano de obra $300. Estará listo en 3 días...",
     uploadPhotos: "Subir Fotos",
     uploadVideo: "Subir Video",
-    submitBid: "Enviar Cotización"
+    submitBid: "Enviar Cotización",
+
+    // Textos para la vista del Dueño (SpencerDashboard)
+    dashboardTitle: "Panel del Dueño",
+    dashboardBack: "Volver al inicio",
+    dashboardSubtitle: "Nueva Petición de Presupuesto (Bid)",
+    dashboardPropLabel: "Dirección de la Propiedad",
+    dashboardPropPlaceholder: "Ej. 123 Main St, Springfield",
+    dashboardEmailLabel: "Correo del Contratista",
+    dashboardEmailPlaceholder: "contratista@email.com",
+    dashboardBtnGenerate: "Generar Enlace Único",
+    dashboardSuccessTitle: "¡Enlace Generado con Éxito!",
+    dashboardSuccessText: "Copia esta URL y envíasela al contratista. Solo él podrá acceder a este formulario.",
+    dashboardBtnCopy: "Copiar",
+    dashboardAlertCopied: "¡Enlace copiado al portapapeles!"
   },
   en: {
     // General texts
@@ -38,7 +52,21 @@ export const dictionary = {
     bidPlaceholder: "Ex: I will fix the roof. Materials are $500 and labor is $300. It will be done in 3 days...",
     uploadPhotos: "Upload Photos",
     uploadVideo: "Upload Video",
-    submitBid: "Submit Bid"
+    submitBid: "Submit Bid",
+
+    // Texts for the Owner View (SpencerDashboard)
+    dashboardTitle: "Owner Dashboard",
+    dashboardBack: "Back to home",
+    dashboardSubtitle: "New Bid Request",
+    dashboardPropLabel: "Property Address",
+    dashboardPropPlaceholder: "Ex. 123 Main St, Springfield",
+    dashboardEmailLabel: "Contractor Email",
+    dashboardEmailPlaceholder: "contractor@email.com",
+    dashboardBtnGenerate: "Generate Unique Link",
+    dashboardSuccessTitle: "Link Generated Successfully!",
+    dashboardSuccessText: "Copy this URL and send it to the contractor. Only they will be able to access this form.",
+    dashboardBtnCopy: "Copy",
+    dashboardAlertCopied: "Link copied to clipboard!"
   }
 };
 

@@ -8,14 +8,15 @@ datasource db {
 }
 
 model Project {
-  id            String   @id @default(cuid())
+  id            String       @id @default(cuid())
   address       String
   squareFootage Int?
   ownerName     String?
-  ownerEmail    String?  
+  ownerEmail    String?
   bids          Bid[]
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  bidRequests   BidRequest[] // Relación con las nuevas peticiones
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
 }
 
 model Contractor {
@@ -27,6 +28,7 @@ model Contractor {
   bids  Bid[]
 }
 
+// El modelo original por si lo sigues usando para lógica interna
 model Bid {
   id             String    @id @default(cuid())
   projectId      String
@@ -43,10 +45,32 @@ model Bid {
   updatedAt      DateTime  @updatedAt
 }
 
+// NUEVO MODELO: Para las URLs dinámicas de los contratistas
+model BidRequest {
+  id              String             @id @default(uuid()) // UUID para que la URL sea segura y no adivinable
+  projectId       String
+  project         Project            @relation(fields: [projectId], references: [id])
+  contractorEmail String             // Solo el email que ingresa Spencer
+  
+  // Campos que llenará el contratista al entrar a la URL
+  rawText         String?            @db.Text
+  mediaUrls       String[]           // Aquí guardaremos las URLs de S3
+  
+  status          BidRequestStatus   @default(PENDING)
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+}
+
 enum BidStatus {
   PENDING_AI_PROCESSING
   PROCESSED
   EMAIL_SENT
   APPROVED
   REJECTED
+}
+
+// Estados para el nuevo flujo
+enum BidRequestStatus {
+  PENDING    // Spencer generó la URL pero el contratista no ha enviado nada
+  SUBMITTED  // El contratista ya llenó el formulario y subió los archivos
 }
