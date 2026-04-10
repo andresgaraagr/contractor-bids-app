@@ -1,0 +1,52 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Project {
+  id            String   @id @default(cuid())
+  address       String
+  squareFootage Int?
+  ownerName     String?
+  ownerEmail    String?  
+  bids          Bid[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Contractor {
+  id    String  @id @default(cuid())
+  name  String
+  phone String?
+  email String?
+  trade String?  
+  bids  Bid[]
+}
+
+model Bid {
+  id             String    @id @default(cuid())
+  projectId      String
+  project        Project   @relation(fields: [projectId], references: [id])
+  contractorId   String
+  contractor     Contractor @relation(fields: [contractorId], references: [id])
+  rawText        String    @db.Text
+  mediaUrls      String[] 
+  translatedText String?   @db.Text
+  extractedTotal Decimal?  @db.Decimal(10, 2)
+  aiSummary      String?   @db.Text 
+  status         BidStatus @default(PENDING_AI_PROCESSING)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+}
+
+enum BidStatus {
+  PENDING_AI_PROCESSING
+  PROCESSED
+  EMAIL_SENT
+  APPROVED
+  REJECTED
+}
